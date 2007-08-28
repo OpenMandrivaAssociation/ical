@@ -74,7 +74,6 @@ Icon=%{name}
 Terminal=false
 Type=Application
 Categories=X-MandrivaLinux-Office-TimeManagement;Office;Calendar;
-Encoding=UTF-8
 EOF
 
 #mdk icons
