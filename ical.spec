@@ -17,7 +17,7 @@ Patch7:		ical-2.2-autoflags.patch
 Url:		http://www.annexia.org/freeware/ical/
 License:	BSD-like
 Group:		Office
-BuildRequires:	tk tk-devel tcl tcl-devel XFree86-devel autoconf
+BuildRequires:	tk tk-devel tcl tcl-devel X11-devel autoconf
 Requires:       tcl tk
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
