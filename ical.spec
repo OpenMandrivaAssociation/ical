@@ -19,6 +19,7 @@ License:	BSD-like
 Group:		Office
 BuildRequires:	tk tk-devel tcl tcl-devel X11-devel autoconf
 Requires:       tcl tk
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Ical is an X Window System based calendar program. Ical will easily
