@@ -76,12 +76,10 @@ tar jxvf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}
 rm -f $RPM_BUILD_ROOT%{_prefix}/man/man1/ical.1
 
 %post
-## menu
 %update_menus
 %update_icon_cache hicolor
 
 %postun
-## menu
 %clean_menus
 %clean_icon_cache hicolor
 
