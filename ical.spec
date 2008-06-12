@@ -75,13 +75,17 @@ tar jxvf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}
 #nuke unpackaged files
 rm -f $RPM_BUILD_ROOT%{_prefix}/man/man1/ical.1
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %update_icon_cache hicolor
+%endif
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
 %clean_icon_cache hicolor
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
