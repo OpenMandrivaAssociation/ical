@@ -1,6 +1,6 @@
 %define name	ical
 %define version	2.3.2
-%define release	%mkrel 2
+%define release	%mkrel 4
 
 Summary:	An X Window System-based calendar program
 Name:		%{name}
