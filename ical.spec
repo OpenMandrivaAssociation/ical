@@ -1,24 +1,32 @@
-%define name	ical
-%define version	2.3.2
-%define release	%mkrel 4
-
 Summary:	An X Window System-based calendar program
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		ical
+Version:	2.3.3
+Release:	%{mkrel 1}
 
-Source0:	http://www.annexia.org/_file/%{name}-%{version}.tar.bz2
+Source0:	http://www.annexia.org/_file/%{name}-%{version}.tar.gz
 Source1:	ical-icons.tar.bz2
-Patch4:		ical-2.2-no-locincpth.patch
-Patch5:		ical-2.2-duplicates.patch
-Patch6:		ical-2.2-alarm-arrow.patch
-Patch7:		ical-2.2-autoflags.patch
+Patch0:		ical-2.2-no-locincpth.patch
+Patch1:		ical-2.2-duplicates.patch
+Patch2:		ical-2.2-alarm-arrow.patch
+Patch3:		ical-2.2-autoflags.patch
+Patch4:		ical-2.3.3-tcl_relocate.patch
+Patch5:		ical-2.3.3-tcl8.6.patch
+# Fix use of variable names of the style foo(done): recent Tcl versions
+# reject this with error "upvar won't create a scalar variable that
+# looks like an array element" - AdamW 2008/10
+Patch6:		ical-2.3.3-varnames.patch
 
-Url:		http://www.annexia.org/freeware/ical/
+URL:		http://www.annexia.org/freeware/ical/
 License:	BSD-like
 Group:		Office
-BuildRequires:	tk tk-devel tcl tcl-devel X11-devel autoconf
-Requires:       tcl tk
+BuildRequires:	tk
+BuildRequires:	tk-devel
+BuildRequires:	tcl
+BuildRequires:	tcl-devel
+BuildRequires:	X11-devel
+BuildRequires:	autoconf
+Requires:	tcl
+Requires:	tk
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -29,32 +37,32 @@ shared calendars between different users.
 
 %prep
 %setup -q
-%patch4 -p1 -b .no-locincpth
-%patch5 -p1 -b .duplicates
-%patch6 -p1 -b .alarm-arrow
-%patch7 -p1 -b .autoflags
-autoconf
-# FIXME: make it lib64 aware, better fix tcl/tk for 9.2
-perl -pi -e "/(TCL|TK)_EXEC_PREFIX/ and s|/lib\b|/%{_lib}|g" configure
-
-cd types
-autoconf
-cd -
+%patch0 -p1 -b .no-locincpth
+%patch1 -p1 -b .duplicates
+%patch2 -p1 -b .alarm-arrow
+%patch3 -p1 -b .autoflags
+%patch4 -p1 -b .tcl_relocate
+%patch5 -p1 -b .tcl86
+%patch6 -p1 -b .varnames
 
 %build
-# FIXME: get it right for 9.2
-%configure2_5x --with-tclsh=%{_bindir}/tclsh --with-tclconfig=%{_libdir} 
+autoreconf
+pushd types
+autoconf
+popd
+
+%configure2_5x --with-tclsh=%{_bindir}/tclsh --with-tclconfig=%{_libdir} --with-tclscripts=%{tcl_sitelib} --with-tkscripts=%{_datadir}/tk%{tcl_version}
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-#mkdir -p $RPM_BUILD_ROOT/etc/X11/wmconfig
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib
-mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+rm -rf %{buildroot}
+#mkdir -p %{buildroot}/etc/X11/wmconfig
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_prefix}/lib
+mkdir -p %{buildroot}%{_mandir}/man1
 
 %makeinstall
-install -m644 doc/ical.man $RPM_BUILD_ROOT%{_mandir}/man1/ical.1
+install -m644 doc/ical.man %{buildroot}%{_mandir}/man1/ical.1
 
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -69,11 +77,11 @@ Categories=Office;Calendar;
 EOF
 
 #mdk icons
-install -d $RPM_BUILD_ROOT%{_iconsdir}
-tar jxvf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}
+install -d %{buildroot}%{_iconsdir}
+tar jxvf %{SOURCE1} -C %{buildroot}%{_iconsdir}
 
 #nuke unpackaged files
-rm -f $RPM_BUILD_ROOT%{_prefix}/man/man1/ical.1
+rm -f %{buildroot}%{_prefix}/man/man1/ical.1
 
 %if %mdkversion < 200900
 %post
@@ -88,7 +96,7 @@ rm -f $RPM_BUILD_ROOT%{_prefix}/man/man1/ical.1
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -98,6 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/ical*
 %{_mandir}/man1/ical.1*
 %{_prefix}/lib/ical
+%{tcl_sitelib}/%{name}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 
