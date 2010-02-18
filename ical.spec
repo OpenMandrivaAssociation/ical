@@ -5,7 +5,7 @@ Release:	%{mkrel 2}
 
 Source0:	http://www.annexia.org/_file/%{name}-%{version}.tar.gz
 Source1:	ical-icons.tar.bz2
-Patch0:		ical-2.2-no-locincpth.patch
+Patch0:		ical-2.3.3-no-locincpth.patch
 Patch1:		ical-2.2-duplicates.patch
 Patch2:		ical-2.2-alarm-arrow.patch
 Patch3:		ical-2.2-autoflags.patch
