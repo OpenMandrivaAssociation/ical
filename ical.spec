@@ -15,6 +15,7 @@ Patch5:		ical-2.3.3-tcl8.6.patch
 # reject this with error "upvar won't create a scalar variable that
 # looks like an array element" - AdamW 2008/10
 Patch6:		ical-2.3.3-varnames.patch
+Patch7:		ical-2.3.3-gcc4.4.patch
 
 URL:		http://www.annexia.org/freeware/ical/
 License:	BSD-like
@@ -44,6 +45,7 @@ shared calendars between different users.
 %patch4 -p1 -b .tcl_relocate
 %patch5 -p1 -b .tcl86
 %patch6 -p1 -b .varnames
+%patch7 -p0 -b .gcc
 
 %build
 autoreconf
@@ -52,7 +54,7 @@ autoconf
 popd
 
 %configure2_5x --with-tclsh=%{_bindir}/tclsh --with-tclconfig=%{_libdir} --with-tclscripts=%{tcl_sitelib} --with-tkscripts=%{_datadir}/tk%{tcl_version}
-%make
+%make CXXLINKER="g++ %{ldflags}"
 
 %install
 rm -rf %{buildroot}
