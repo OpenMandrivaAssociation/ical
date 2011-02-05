@@ -1,7 +1,7 @@
 Summary:	An X Window System-based calendar program
 Name:		ical
 Version:	2.3.3
-Release:	%{mkrel 2}
+Release:	%{mkrel 3}
 
 Source0:	http://www.annexia.org/_file/%{name}-%{version}.tar.gz
 Source1:	ical-icons.tar.bz2
@@ -24,8 +24,6 @@ BuildRequires:	tk
 BuildRequires:	tk-devel
 BuildRequires:	tcl
 BuildRequires:	tcl-devel
-BuildRequires:	X11-devel
-BuildRequires:	autoconf
 Requires:	tcl
 Requires:	tk
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
