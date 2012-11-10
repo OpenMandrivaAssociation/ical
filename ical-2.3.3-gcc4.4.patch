@@ -1,0 +1,11 @@
+--- calendar/calfile.C.str	2010-02-18 11:11:26.000000000 +0100
++++ calendar/calfile.C	2010-02-18 11:11:39.000000000 +0100
+@@ -58,7 +58,7 @@
+     backupName = tmp;
+ 
+     // Get directory name for access checks
+-    char* lastSlash = strrchr(name, '/');
++    const char* lastSlash = strrchr(name, '/');
+     if (lastSlash == 0) {
+ 	/* Calendar is in current directory */
+ 	tmp = new char[3];

@@ -1,0 +1,63 @@
+--- ical-2.3.3/Makefile.in	2004-03-11 03:26:55.000000000 -0800
++++ ical-2.3.3/Makefile.in.new	2008-10-22 16:21:28.000000000 -0700
+@@ -17,6 +17,7 @@
+        BINDIR = $(exec_prefix)/bin
+        LIBDIR = $(prefix)/lib
+       ILIBDIR = $(LIBDIR)/ical/v@ICAL_VERSION@
++       TCLDIR = $(prefix)/share/tcl@TCL_VERSION@/ical/v@ICAL_VERSION@
+        MANDIR = $(prefix)/man
+ 
+            CC = @CC@
+@@ -164,24 +165,18 @@
+ 	-$(INSTALL_DATA) $(srcdir)/doc/ical.man $(MANDIR)/man1/ical.1
+ 
+ instlib:
+-	-$(MKDIR) $(LIBDIR)
+-	-$(MKDIR) $(LIBDIR)/ical
+-	-$(MKDIR) $(ILIBDIR)
+-	-$(MKDIR) $(ILIBDIR)/tcllib
++	-$(MKDIR) -p $(TCLDIR)/tcllib
+ 	@for f in $(LIB_FILES) $(srcdir)/tcllib/tclIndex ; do\
+-		echo $(INSTALL_DATA) $$f $(ILIBDIR)/tcllib/`basename $$f`;\
+-		$(INSTALL_DATA) $$f $(ILIBDIR)/tcllib/`basename $$f`;\
++		echo $(INSTALL_DATA) $$f $(TCLDIR)/tcllib/`basename $$f`;\
++		$(INSTALL_DATA) $$f $(TCLDIR)/tcllib/`basename $$f`;\
+ 	done
+ 	@for f in $(ICAL_FILES) $(srcdir)/tclIndex ; do\
+-		echo $(INSTALL_DATA) $$f $(ILIBDIR)/`basename $$f`;\
+-		$(INSTALL_DATA) $$f $(ILIBDIR)/`basename $$f`;\
++		echo $(INSTALL_DATA) $$f $(TCLDIR)/`basename $$f`;\
++		$(INSTALL_DATA) $$f $(TCLDIR)/`basename $$f`;\
+ 	done
+ 
+ instcontrib:
+-	-$(MKDIR) $(LIBDIR)
+-	-$(MKDIR) $(LIBDIR)/ical
+-	-$(MKDIR) $(ILIBDIR)
+-	-$(MKDIR) $(ILIBDIR)/contrib
++	-$(MKDIR) -p $(ILIBDIR)/contrib
+ 	@for f in $(srcdir)/contrib/* ; do\
+ 		if test -f $$f ; then\
+ 		echo $(INSTALL_DATA) $$f $(ILIBDIR)/contrib/`basename $$f`;\
+
+--- ical-2.3.3/configure.in	2008-10-22 16:38:36.000000000 -0700
++++ ical-2.3.3/configure.in.new	2008-10-22 16:38:53.000000000 -0700
+@@ -248,6 +248,7 @@
+ AC_SUBST(TK_EXEC_PREFIX)
+ AC_SUBST(TK_XINCLUDES)
+ AC_SUBST(TCLTK_CPPFLAGS)
++AC_SUBST(TCL_VERSION)
+ 
+ #### Find names of script files for use in stand-alone installation
+ TCL_SCRIPT_DIR="$TCL_PREFIX/lib/tcl$TCL_VERSION"
+--- ical-2.3.3/startup.tcl.in	2004-03-11 02:14:15.000000000 -0800
++++ ical-2.3.3/startup.tcl.in.new	2008-10-22 17:02:13.000000000 -0700
+@@ -24,7 +24,7 @@
+     set ical(mailer)		{@MAILER@}
+     set ical(prefix)		{@prefix@}
+     set ical(libparent)		{@prefix@/lib/ical}
+-    set ical(library)   	{@prefix@/lib/ical/v@ICAL_VERSION@}
++    set ical(library)   	{@prefix@/share/tcl@TCL_VERSION@/ical/v@ICAL_VERSION@}
+     set ical(startdate)		[date today]
+     set ical(iconic)		0
+     set ical(prefs)		{}

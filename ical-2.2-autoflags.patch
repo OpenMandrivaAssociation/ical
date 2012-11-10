@@ -1,0 +1,52 @@
+--- ical-2.2/calendar/Makefile.in.autoflags	1997-10-22 01:52:59.000000000 +0200
++++ ical-2.2/calendar/Makefile.in	2003-04-28 17:49:46.000000000 +0200
+@@ -12,7 +12,7 @@
+            AR = ar
+          ECHO = echo
+ 
+-   CXXFLAGS = -O
++   CXXFLAGS = @CXXFLAGS@
+     CXXINCS = -I.. -I$(srcdir) -I$(srcdir)/../types -I$(srcdir)/../time
+ 
+     CXXOBJS = arrays.o calendar.o calfile.o dateset.o item.o\
+--- ical-2.2/types/Makefile.in.autoflags	1997-10-22 01:53:02.000000000 +0200
++++ ical-2.2/types/Makefile.in	2003-04-28 17:50:11.000000000 +0200
+@@ -12,7 +12,7 @@
+          ECHO = echo
+        RANLIB = @RANLIB@
+ 
+-     CXXFLAGS = -O $(DEFS)
++     CXXFLAGS = @CXXFLAGS@ $(DEFS)
+       CXXINCS = -I$(srcdir)
+          OBJS = bitvec.o hashfuncs.o intset.o
+         TESTS = testarray testbv testomap testoset timemap testhash testmap\
+--- ical-2.2/time/Makefile.in.autoflags	1996-02-10 04:17:47.000000000 +0100
++++ ical-2.2/time/Makefile.in	2003-04-28 17:50:30.000000000 +0200
+@@ -11,7 +11,7 @@
+          ECHO = echo
+        RANLIB = @RANLIB@
+ 
+-     CXXFLAGS = -O
++     CXXFLAGS = @CXXFLAGS@
+       CXXINCS = -I.. -I$(srcdir)
+          OBJS = Date.o Month.o Time.o WeekDay.o Year.o parse.o
+         TESTS = testparse
+--- ical-2.2/Makefile.in.autoflags	2003-04-28 17:48:39.000000000 +0200
++++ ical-2.2/Makefile.in	2003-04-28 17:49:23.000000000 +0200
+@@ -59,14 +59,12 @@
+ # Tiny bundled executable uses shared versions of tcl/tk libraries
+  TINY_BLIBS = $(LIBS)
+ 
+-       OPTF = -O
+-
+-   CXXFLAGS = $(OPTF)
++   CXXFLAGS = @CXXFLAGS@
+     CXXINCS = -I. -I$(srcdir) -I$(srcdir)/calendar \
+               -I$(srcdir)/types -I$(srcdir)/time \
+               $(X_CFLAGS) @TCLTK_CPPFLAGS@
+ 
+-     CFLAGS = $(OPTF) -I. -I$(srcdir) $(X_CFLAGS)
++     CFLAGS = @CFLAGS@ -I. -I$(srcdir) $(X_CFLAGS)
+ 
+ OBJS = cal_tcl.o dateeditor.o dispatch.o ical.o ical_tcl.o \
+        item_tcl.o object.o time_tcl.o @LIBOBJS@
