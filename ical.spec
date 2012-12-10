@@ -110,3 +110,83 @@ rm -rf %{buildroot}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/mandriva-%{name}.desktop
 
+
+
+%changelog
+* Sat Feb 05 2011 Funda Wang <fwang@mandriva.org> 2.3.3-3mdv2011.0
++ Revision: 636004
+- tighten BR
+
+* Thu Feb 18 2010 Funda Wang <fwang@mandriva.org> 2.3.3-2mdv2011.0
++ Revision: 507436
+- fix build with gcc 4.4
+- rediff locincpth patch
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Fri Dec 05 2008 Adam Williamson <awilliamson@mandriva.org> 2.3.3-1mdv2009.1
++ Revision: 310150
+- %%buildroot not $RPM_BUILD_ROOT
+- drop some unnecessary old workarounds
+- clean requires
+- add varnames.patch (fix variable names issue for tcl 8.5 and 8.6)
+- add tcl8.6.patch (fix for tcl 8.6)
+- add tcl_relocate.patch (install to new locations per policy)
+- new release 2.3.3
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 2.3.2-4mdv2009.0
++ Revision: 247149
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+* Wed Jan 02 2008 Olivier Blin <oblin@mandriva.com> 2.3.2-2mdv2008.1
++ Revision: 140756
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - buildrequires X11-devel instead of XFree86-devel
+
+* Mon Oct 01 2007 Adam Williamson <awilliamson@mandriva.org> 2.3.2-2mdv2008.0
++ Revision: 94318
+- rebuild against tcl / tk 8.5 (#34293)
+- add several doc files
+- update ical-icons.tar.bz2 for xdg icon spec
+- drop old menu and X-Mandriva category
+- correct autoconf buildrequires
+- new license policy
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+
+
+* Wed Nov 08 2006 Pascal Terjan <pterjan@mandriva.org> 2.3.2-1mdv2007.0
++ Revision: 78512
+- XDG menu
+- 2.3.2
+- New URL
+- Dropped old patches
+- mkrel
+- BuildRequires autoconf
+- XDG menu
+- Import ical
+
+* Sun Jan 01 2006 Oden Eriksson <oeriksson@mandriva.com> 2.2-33mdk
+- rebuilt against soname aware deps (tcl/tk)
+- fix deps
+
+* Fri Nov 19 2004 Michael Scherer <misc@mandrake.org> 2.2-32mdk 
+- add Requires tcl tk
+
+* Sat Aug 28 2004 Frederic Crozat <fcrozat@mandrakesoft.com> 2.2-31mdk
+- Fix menu
+
+* Fri Jun 04 2004 Montel Laurent <lmontel@mandrakesoft.com> 2.2-30mdk
+- Rebuild
+
+* Wed May 05 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 2.2-29mdk
+- fix buildrequires
+
