@@ -1,7 +1,7 @@
 Summary:	An X Window System-based calendar program
 Name:		ical
 Version:	2.3.3
-Release:	%{mkrel 3}
+Release:	4
 
 Source0:	http://www.annexia.org/_file/%{name}-%{version}.tar.gz
 Source1:	ical-icons.tar.bz2
