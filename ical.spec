@@ -17,7 +17,7 @@ Patch5:		ical-2.3.3-tcl8.6.patch
 Patch6:		ical-2.3.3-varnames.patch
 Patch7:		ical-2.3.3-gcc4.4.patch
 
-URL:		http://www.annexia.org/freeware/ical/
+URL:		https://www.annexia.org/freeware/ical/
 License:	BSD-like
 Group:		Office
 BuildRequires:	tk
