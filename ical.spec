@@ -20,6 +20,11 @@ Patch7:		ical-2.3.3-gcc4.4.patch
 URL:		https://www.annexia.org/freeware/ical/
 License:	BSD-like
 Group:		Office
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	tk
 BuildRequires:	tk-devel
 BuildRequires:	tcl
